@@ -58,24 +58,6 @@ public class EventSearch {
             System.out.println ("No events found in date range");
     }
 
-    public static void EventSearching(String[] args) {
-        Event [] events = new Event [10000];
-        int eventCount = 0;
-
-
-        // Example of added events
-        events[eventCount++] = new Event(1, "Meeting", "2025-10-05");
-        events[eventCount++] = new Event(2, "Doctor Appointment", "2025-10-06");
-        events[eventCount++] = new Event(3, "Presentation", "2025-10-09");
-        events[eventCount++] = new Event(4, "Group Study", "2025-10-06");
-        events[eventCount++] = new Event(5, "Exam", "2025-09-26");
-        events[eventCount++] = new Event(6, "Submission FOP", "2026-01-13");
-        events[eventCount++] = new Event(7, "Group Discussion", "2025-11-08");
-
-        searchByDate (events, eventCount, "2025-10-06");
-        searchByEvent (events, eventCount, "Group Study");
-        searchByRange (events, eventCount, "2025-09-26", "2025-10-09");
-    }
 }
 
 //KamiliaAhlamTaqi
