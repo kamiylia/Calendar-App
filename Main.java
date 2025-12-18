@@ -21,6 +21,12 @@ public class Main {
             System.out.println("6. Exit");
             System.out.print("Choose option (1-6): ");
             
+            if (!scanner.hasNextInt()) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine(); // consume invalid input
+                continue;
+            }
+            
             int choice = scanner.nextInt();
             scanner.nextLine();
             
@@ -75,6 +81,12 @@ public class Main {
             System.out.println("5. Back to Main Menu");
             System.out.print("Choose option (1-5): ");
             
+            if (!scanner.hasNextInt()) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine();
+                continue;
+            }
+            
             int eventChoice = scanner.nextInt();
             scanner.nextLine();
             
@@ -115,6 +127,11 @@ public class Main {
         System.out.println("3. Search by date range");
         System.out.print("Choose search type: ");
         
+        if (!scanner.hasNextInt()) {
+            System.out.println("Invalid input. Please enter a number.");
+            return;
+        }
+        
         int searchChoice = scanner.nextInt();
         scanner.nextLine();
         
@@ -154,6 +171,12 @@ public class Main {
         System.out.println("4. Check reminders");
         
         System.out.print("Choose view type: ");
+        
+        if (!scanner.hasNextInt()) {
+            System.out.println("Invalid input. Please enter a number.");
+            return;
+        }
+        
         int viewChoice = scanner.nextInt();
         
         switch (viewChoice) {
@@ -200,6 +223,11 @@ public class Main {
         System.out.println("2. Restore from backup (overwrite)");
         System.out.println("3. Restore from backup (append)");
         System.out.print("Choose option: ");
+        
+        if (!scanner.hasNextInt()) {
+            System.out.println("Invalid input. Please enter a number.");
+            return;
+        }
         
         int backupChoice = scanner.nextInt();
         scanner.nextLine();
