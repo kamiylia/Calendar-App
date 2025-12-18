@@ -94,56 +94,57 @@ public class Eventupdatecreationdelete {
             System.out.println("Error saving event: " + e.getMessage());  
         }
     }
-    
     // =================== VIEW EVENT ===================
-    public static void viewAllEvents() {//view event method  
-        System.out.println("\n-- ALL EVENTS ---");  
+public static void viewAllEvents() {//view event method  
+    System.out.println("\n-- ALL EVENTS ---");  
 
-        try {
-            File file = new File(EVENT_FILE);  
-    
-            if (!file.exists()) { //file not found
-                System.out.println("No events found.");
-                return; // end 
-            }
-            
-            BufferedReader reader = new BufferedReader(new FileReader(EVENT_FILE));  
-        
-            String line;
-            int eventCount = 0;
-        
-            System.out.println("ID | Title | Description | Start Time | End Time");
-            System.out.println("----------------------------------");
-        
-            while ((line = reader.readLine()) != null) {
-                if (line.trim().isEmpty()) {
-                    continue;
-                }
-                
-                String[] parts = line.split(",");
-                
-                if (parts.length >= 5) {
-                    System.out.print(parts[0] + " | ");
-                    System.out.print(parts[1] + " | ");
-                    System.out.print(parts[3] + " | ");
-                    System.out.println(parts[4]);
-                    eventCount++;
-                }
-            }
-            
-            reader.close();
-            
-            if (eventCount == 0) {
-                System.out.println("No events found.");
-            } else {
-                System.out.println("Total events: " + eventCount);
-            }
-            
-        } catch (IOException e) {
-            System.out.println("Error reading events: " + e.getMessage());
+    try {
+        File file = new File(EVENT_FILE);  
+
+        if (!file.exists()) { //file not found
+            System.out.println("No events found.");
+            return; // end 
         }
-    }
+        
+        BufferedReader reader = new BufferedReader(new FileReader(EVENT_FILE));  
     
+        String line;
+        int eventCount = 0;
+    
+        // Updated header to include Description
+        System.out.println("ID | Title | Description | Start Time | End Time");
+        System.out.println("--------------------------------------------------------------");
+    
+        while ((line = reader.readLine()) != null) {
+            if (line.trim().isEmpty()) {
+                continue;
+            }
+            
+            String[] parts = line.split(",");
+            
+            if (parts.length >= 5) {
+                // Add all fields including description (parts[2])
+                System.out.print(parts[0] + " | ");
+                System.out.print(parts[1] + " | ");
+                System.out.print(parts[2] + " | ");  // ADDED: Display description
+                System.out.print(parts[3] + " | ");
+                System.out.println(parts[4]);
+                eventCount++;
+            }
+        }
+        
+        reader.close();
+        
+        if (eventCount == 0) {
+            System.out.println("No events found.");
+        } else {
+            System.out.println("Total events: " + eventCount);
+        }
+        
+    } catch (IOException e) {
+        System.out.println("Error reading events: " + e.getMessage());
+    }
+}
     // =================== UPDATE EVENT ===================
     public static void updateEvent(Scanner scanner) {
         System.out.println("\n=== UPDATE EVENT ===");
