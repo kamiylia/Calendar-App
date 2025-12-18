@@ -16,10 +16,11 @@ public class Main {
             System.out.println("1. Event Management (Create/View/Update/Delete)");
             System.out.println("2. Event Search");
             System.out.println("3. View Calendar");
-            System.out.println("4. Check Reminders");
-            System.out.println("5. Backup & Restore");
-            System.out.println("6. Exit");
-            System.out.print("Choose option (1-6): ");
+            System.out.println("4. Recurring Events");
+            System.out.println("5. Check Reminders");
+            System.out.println("6. Backup & Restore");
+            System.out.println("7. Exit");
+            System.out.print("Choose option (1-7): ");
             
             if (!scanner.hasNextInt()) {
                 System.out.println("Invalid input. Please enter a number.");
@@ -47,16 +48,21 @@ public class Main {
                     break;
                     
                 case 4:
+                    // Recurring Events
+                    recurringEventsMenu(scanner);
+                    break;
+                    
+                case 5:
                     // Check Reminders
                     ReminderManager.checkReminders();
                     break;
                     
-                case 5:
+                case 6:
                     // Backup & Restore
                     backupRestore(scanner);
                     break;
                     
-                case 6:
+                case 7:
                     running = false;
                     System.out.println("Thank you for using Calendar App. Goodbye!");
                     break;
@@ -125,6 +131,7 @@ public class Main {
         System.out.println("1. Search by date");
         System.out.println("2. Search by event name");
         System.out.println("3. Search by date range");
+        System.out.println("4. Advanced Search (from CSV file)");
         System.out.print("Choose search type: ");
         
         if (!scanner.hasNextInt()) {
@@ -154,6 +161,11 @@ public class Main {
                 System.out.print("Enter end date (YYYY-MM-DD): ");
                 String endDate = scanner.nextLine();
                 EventSearch.searchByRange(events, eventCount, startDate, endDate);
+                break;
+                
+            case 4:
+                // Advanced Search from CSV file
+                EventAdvancedSearch.advancedSearchMenu();
                 break;
                 
             default:
@@ -201,6 +213,34 @@ public class Main {
                 
             default:
                 System.out.println("Invalid view option.");
+        }
+    }
+    
+    private static void recurringEventsMenu(Scanner scanner) {
+        System.out.println("\n--- RECURRING EVENTS ---");
+        System.out.println("Note: This feature requires an existing event to make recurring.");
+        System.out.println("Please create an event first using Event Management.");
+        
+        System.out.print("Enter Event ID to make recurring: ");
+        
+        if (!scanner.hasNextInt()) {
+            System.out.println("Invalid input. Please enter a number.");
+            return;
+        }
+        
+        int eventId = scanner.nextInt();
+        scanner.nextLine();
+        
+        System.out.print("Enter event start date/time (yyyy-MM-ddTHH:mm:ss): ");
+        String dateTimeStr = scanner.nextLine();
+        
+        try {
+            java.time.LocalDateTime dateTime = java.time.LocalDateTime.parse(dateTimeStr);
+            RecurringEvents.RecurringHandling(eventId, dateTime);
+            System.out.println("Recurring event settings saved!");
+        } catch (Exception e) {
+            System.out.println("Invalid date/time format. Please use yyyy-MM-ddTHH:mm:ss format.");
+            System.out.println("Example: 2025-12-25T14:30:00");
         }
     }
     
