@@ -1,3 +1,5 @@
+package src.main.java.fopassignment;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.Duration;
@@ -36,6 +38,7 @@ public class ReminderManager {
                 break;
             default:
                 System.out.println("Invalid choice. No reminders shown.");
+                sc.close();
                 return;
         }
 
@@ -72,5 +75,7 @@ public class ReminderManager {
         } catch (Exception e) {
             System.out.println("Error reading events for reminders.");
         }
+        
+        sc.close();
     }
 }

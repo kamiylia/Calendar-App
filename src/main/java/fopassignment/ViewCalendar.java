@@ -1,4 +1,4 @@
-package com.mycompany.assignment_viewcalendar;
+package src.main.java.fopassignment;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 /**
  * @author LENOVO
  */
-public class Assignment_ViewCalendar {
+public class ViewCalendar {
     private List<Calender_Event> events; // creates a master list where it is an empty filing cabinet where all the appointments will be stored
     
     // Fixed capitalization to match your usage in methods
@@ -18,7 +18,7 @@ public class Assignment_ViewCalendar {
     private static final DateTimeFormatter DAY_DATE_FORMATTER = DateTimeFormatter.ofPattern("EEE dd");
     private static final DateTimeFormatter MONTH_YEAR_FORMATTER = DateTimeFormatter.ofPattern("MMM yyyy");
 
-    public Assignment_ViewCalendar() {
+    public ViewCalendar() {
         this.events = new ArrayList<>(); // Initializes storage list
         
         // Adding sample events to make sure the output is not empty while test run
@@ -124,8 +124,8 @@ public class Assignment_ViewCalendar {
         }
     }
 
-    public static void main(String[] args) {
-        Assignment_ViewCalendar app = new Assignment_ViewCalendar();
+    public static void CalendarViewing(String[] args) {
+        ViewCalendar app = new ViewCalendar();
         app.checkAndPrintReminders();
         
         System.out.println("\n" + "=".repeat(45) + "\n");

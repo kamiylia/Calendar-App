@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
-package backupmanager;
+package src.main.java.fopassignment;
 
 import java.io.*;
 import java.nio.file.*;
@@ -91,18 +87,3 @@ public class BackupManager {
         writer.close();
     }
 }
-
-public class Main {
-    public static void main(String[] args) {
-
-        // Example: backup into folder "backup_folder"
-        BackupManager.backup("backup_folder");
-
-        // Example: restore from backup (overwrite)
-        BackupManager.restore("backup_folder/backup.txt", true);
-
-        // Example: restore from backup (append)
-        // BackupManager.restore("backup_folder/backup.txt", false);
-    }
-}
-

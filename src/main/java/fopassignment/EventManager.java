@@ -1,15 +1,18 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package src.main.java.fopassignment;
-import src.main.java.fopassignment.RecurringEvents;
 import java.io.*;
 import java.util.Scanner;
 
-class Eventupdatecreationdelete {
+public class EventManager {
     
     // File paths - using relative paths 
     private static final String EVENT_FILE = "event.csv";
     
     // Main method with menu system
-    public static void EventHandling(String[] args) {
+    public static void EventManaging(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
         

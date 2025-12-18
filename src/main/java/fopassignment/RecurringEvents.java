@@ -1,28 +1,32 @@
 //Shahitya shri
+
+package src.main.java.fopassignment;
 import java.util.Scanner;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.io.FileWriter;
 import java.io.IOException;
-class Event {
-    int eventId;
-    String title;
-    String recurrentInterval;
-    int recurrentTimes;
-    String recurrentEndDate;
-
-    public Event(int id, String title) {
-        this.eventId = id;
-        this.title = title;
-        this.recurrentInterval = "0";
-        this.recurrentTimes = 0;
-        this.recurrentEndDate = "0";
-    }
-}
 
 public class RecurringEvents{
-    public static void RecurringHandling(Event events, int month, int day) {
+    
+    static class Event {
+        int eventId;
+        String title;
+        String recurrentInterval;
+        int recurrentTimes;
+        String recurrentEndDate;
+
+        public Event(int id, String title) {
+            this.eventId = id;
+            this.title = title;
+            this.recurrentInterval = "0";
+            this.recurrentTimes = 0;
+            this.recurrentEndDate = "0";
+        }
+    }
+    public static void RecurringHandling(int eventID, LocalDateTime date) {
        Scanner sc = new Scanner(System.in);
-        Event ev = events[month][day];
+        Event ev = new Event(eventID, "Event " + eventID);
         
         System.out.println("\nRecurring events");
         System.out.println("1- No repetition");
@@ -56,22 +60,19 @@ public class RecurringEvents{
             }
         }    
     
-        int x=0;
-        String interval;
         switch(repeat){
             case 1 : break;
             case 2 :ev.recurrentInterval = "1m";
-                    interval = "monthly";
-                    recurring(events,ev,month,day,interval, days,x); break;
+                    // recurring functionality would be implemented here
+                    break;
             case 3 :ev.recurrentInterval = "1w";
-                    interval = "daily";
-                    x = 7;
-                    recurring(events,ev,month,day,interval, days,x); break;
+                    // recurring functionality would be implemented here
+                    break;
             case 4 : System.out.println("Enter how many days interval before next event: ");
-                    x = sc.nextInt();
-                    interval = "daily";
+                    int x = sc.nextInt();
                     ev.recurrentInterval = x+"d";
-                    recurring(events,ev,month,day,interval, days,x); break;
+                    // recurring functionality would be implemented here
+                    break;
             default : break;
         }
         sc.nextLine();
@@ -83,11 +84,13 @@ public class RecurringEvents{
          fw.close();
          }
          catch(IOException e){
-             System.out.println("Error writing file");
+             System.out.println("Error writing file: " + e.getMessage());
          }
+         
+         sc.close();
     }
-}
-    static void recurring(Event[][] events, Event ev, int month, int day,String interval, int[] days, int x){
+    
+    static void recurring(Event[][] events, Event ev, int month, int day, String interval, int x){
        
         LocalDate nextDate = LocalDate.of(2026, month+1, day+1);
         int counter = 0;
