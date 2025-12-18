@@ -37,7 +37,7 @@ public class Main {
                     
                 case 3:
                     // View Calendar
-                    viewCalendar();
+                    viewCalendar(scanner);
                     break;
                     
                 case 4:
@@ -144,7 +144,7 @@ public class Main {
         }
     }
     
-    private static void viewCalendar() {
+    private static void viewCalendar(Scanner scanner) {
         ViewCalendar calendar = new ViewCalendar();
         
         System.out.println("\n--- CALENDAR VIEW ---");
@@ -153,7 +153,6 @@ public class Main {
         System.out.println("3. Yearly view (2026)");
         System.out.println("4. Check reminders");
         
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Choose view type: ");
         int viewChoice = scanner.nextInt();
         
@@ -180,8 +179,6 @@ public class Main {
             default:
                 System.out.println("Invalid view option.");
         }
-        
-        scanner.close();
     }
     
     private static void printYearlyCalendarView(int year) {
