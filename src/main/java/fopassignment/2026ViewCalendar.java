@@ -1,4 +1,4 @@
-package com.mycompany._calender_view;
+package src.main.java.fopassignment;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -7,10 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author LENOVO
- */
-public class App {
+
+class App {
     private List<Calender_Event> events; 
     private static final DateTimeFormatter DAY_DATE_FORMATTER = DateTimeFormatter.ofPattern("EEE dd");
     private static final DateTimeFormatter MONTH_YEAR_FORMATTER = DateTimeFormatter.ofPattern("MMM yyyy");
@@ -142,32 +140,4 @@ public class App {
     }
 }
 
-// Helper Class (No 'public' keyword so it fits in the same file)
-class Calender_Event {
-    private LocalDate date;
-    private LocalTime time;
-    private String description;
-    
-    public Calender_Event(LocalDate date, LocalTime time, String description) {
-        this.date = date;
-        this.time = time;
-        this.description = description;
-    }
-    
-    public LocalDateTime getStartTime() {
-        return LocalDateTime.of(this.date, this.time);
-    }
-    
-    public LocalDate getDate() { return date; }
-    public LocalTime getTime() { return time; }
-    public String getDescription() { return description; }
-    
-    public String getFormattedTime() {
-        return "(" + time.format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
-    }
-    
-    @Override
-    public String toString() {
-        return description + " " + getFormattedTime();
-    }
-}
+
