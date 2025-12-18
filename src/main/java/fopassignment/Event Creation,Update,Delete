@@ -112,7 +112,7 @@ public class Eventupdatecreationdelete {
             String line;
             int eventCount = 0;
         
-            System.out.println("ID | Title | Start Time | End Time");
+            System.out.println("ID | Title | Description | Start Time | End Time");
             System.out.println("----------------------------------");
         
             while ((line = reader.readLine()) != null) {
