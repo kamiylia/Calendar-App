@@ -19,39 +19,10 @@ class Event {
     }
 }
 
-public class Recurring_events2 {
-    public static void main(String[] args) {
+public class RecurringEvents{
+    public static void RecurringHandling(Event events, int month, int day) {
        Scanner sc = new Scanner(System.in);
-       String months[]= {"January","February","March","April","May","June","July","August","September","October","November","December"};
-       int[] days= {31,28,31,30,31,30,31,31,30,31,30,31};
-       Event events[][]= new Event[12][31];
-       int date, day, month;
-       int eventCounter = 0;
-       
-        while (true){
-        
-        while(true){
-            System.out.println("Choose month: (0-Jan, 1-Feb, 2-Mar....11-Dec)");
-            month = sc.nextInt();
-            if(month>=0&&month<=11)
-                break;
-            System.out.println("Invalid month try again");
-        }
-        
-        while(true){
-            System.out.println("Choose the date: (1-31)");
-            date = sc.nextInt();
-            day = date-1;
-            if(day>=1&&month<=31)
-                break;
-            System.out.println("Invalid day try again");
-        }
-        
-        sc.nextLine();
-        System.out.print("Event: ");
-        String title = sc.nextLine();
-        Event ev = new Event(++eventCounter,title);
-        events[month][day]= ev;
+        Event ev = events[month][day];
         
         System.out.println("\nRecurring events");
         System.out.println("1- No repetition");
@@ -83,8 +54,8 @@ public class Recurring_events2 {
                 ev.recurrentEndDate = sc.nextLine().trim();  //had whitespace before so had to add .trim()
                 ev.recurrentTimes = 0;
             }
-                
-        }
+        }    
+    
         int x=0;
         String interval;
         switch(repeat){
@@ -114,26 +85,8 @@ public class Recurring_events2 {
          catch(IOException e){
              System.out.println("Error writing file");
          }
-         
-        System.out.print("\nWould you like to add more events?(Y/N): ");
-        String cont = sc.nextLine();
-        if(cont.equalsIgnoreCase("N"))
-            break;
-         }
-        
-         //print calendar events
-         System.out.println("\n********Calendar Events********");
-         for(int m=0; m<12; m++){
-             for(int d=0; d<31; d++){
-                 if(events[m][d]!= null){
-                     System.out.printf("%-15s Event: %-20s%n",months[m]+" "+(d+1),events[m][d].title+"\n");
-                 }
-             }
-         }
-         
-        sc.close();
     }
-    
+}
     static void recurring(Event[][] events, Event ev, int month, int day,String interval, int[] days, int x){
        
         LocalDate nextDate = LocalDate.of(2026, month+1, day+1);
