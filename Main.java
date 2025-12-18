@@ -150,7 +150,8 @@ public class Main {
         System.out.println("\n--- CALENDAR VIEW ---");
         System.out.println("1. Weekly view");
         System.out.println("2. Monthly view");
-        System.out.println("3. Check reminders");
+        System.out.println("3. Yearly view (2026)");
+        System.out.println("4. Check reminders");
         
         Scanner scanner = new Scanner(System.in);
         System.out.print("Choose view type: ");
@@ -168,6 +169,11 @@ public class Main {
                 break;
                 
             case 3:
+                // 2026 Yearly Calendar View
+                printYearlyCalendarView(2026);
+                break;
+                
+            case 4:
                 calendar.checkAndPrintReminders();
                 break;
                 
@@ -176,6 +182,19 @@ public class Main {
         }
         
         scanner.close();
+    }
+    
+    private static void printYearlyCalendarView(int year) {
+        ViewCalendar calendar = new ViewCalendar();
+        
+        System.out.println("\n" + "=".repeat(45));
+        System.out.println("          FULL YEAR CALENDAR: " + year);
+        System.out.println("=".repeat(45));
+
+        for (int m = 1; m <= 12; m++) {
+            calendar.printmonthly_calendar_view(YearMonth.of(year, m));
+            System.out.println("-".repeat(45));
+        }
     }
     
     private static void backupRestore(Scanner scanner) {
