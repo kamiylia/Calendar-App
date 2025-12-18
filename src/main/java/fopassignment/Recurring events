@@ -54,10 +54,9 @@ public class Recurring_events2 {
         
         System.out.println("\nRecurring events");
         System.out.println("1- No repetition");
-        System.out.println("2- Yearly (same month and date)");
-        System.out.println("3- Monthly (same date)");
-        System.out.println("4- Weeekly (same day)");
-        System.out.println("5- Every X days");
+        System.out.println("2- Monthly (same date)");
+        System.out.println("3- Weeekly (same day)");
+        System.out.println("4- Every X days");
         System.out.print("Choose: ");
             
         int repeat;
@@ -89,15 +88,14 @@ public class Recurring_events2 {
         String interval;
         switch(repeat){
             case 1 : break;
-            case 2 : break;
-            case 3 :ev.recurrentInterval = "1m";
+            case 2 :ev.recurrentInterval = "1m";
                     interval = "monthly";
                     recurring(events,ev,month,day,interval, days,x); break;
-            case 4 :ev.recurrentInterval = "1w";
+            case 3 :ev.recurrentInterval = "1w";
                     interval = "daily";
                     x = 7;
                     recurring(events,ev,month,day,interval, days,x); break;
-            case 5 : System.out.println("Enter how many days interval before next event: ");
+            case 4 : System.out.println("Enter how many days interval before next event: ");
                     x = sc.nextInt();
                     interval = "daily";
                     ev.recurrentInterval = x+"d";
@@ -163,12 +161,13 @@ public class Recurring_events2 {
         int m = nextDate.getMonthValue()-1;
         int d = nextDate.getDayOfMonth()-1;
         
-       if (m >= 0 && m < 12 && d >= 0 && d < 31) {
+        if (m >= 0 && m < 12 && d >= 0 && d < 31) {
         events[m][d] = new Event(ev.eventId, ev.title);
-    } else {
+        } else {
         break;
-       }
-        
-        }  
+        }        
+      }  
     }
+}
+      
 //shahitya shri 12/12/2025
