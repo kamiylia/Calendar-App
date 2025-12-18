@@ -1,3 +1,5 @@
+package src.main.java.fopassignment;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.LocalDateTime;
@@ -39,6 +41,8 @@ public class EventAdvancedSearch {
         else {
             System.out.println("Invalid choice.");
         }
+        
+        sc.close();
     }
 
     // ========= SEARCH BY TITLE =========
