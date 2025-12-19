@@ -1,4 +1,4 @@
-package FOPfinal.src.main.java;
+package src.fopassignment;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

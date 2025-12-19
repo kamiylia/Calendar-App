@@ -1,7 +1,8 @@
-package FOPfinal.src.main.java;
+package src.fopassignment;
 
 import java.io.*;
 import java.nio.file.*;
+import java.util.Scanner;
 
 public class BackupManager {
 
@@ -85,5 +86,44 @@ public class BackupManager {
         BufferedWriter writer = new BufferedWriter(new FileWriter(filename, append));
         writer.write(content);
         writer.close();
+    }
+
+    public static void backupRestore(Scanner scanner) {
+        System.out.println("\n--- BACKUP & RESTORE ---");
+        System.out.println("1. Create backup");
+        System.out.println("2. Restore from backup (overwrite)");
+        System.out.println("3. Restore from backup (append)");
+        System.out.print("Choose option: ");
+        
+        if (!scanner.hasNextInt()) {
+            System.out.println("Invalid input. Please enter a number.");
+            return;
+        }
+        
+        int backupChoice = scanner.nextInt();
+        scanner.nextLine();
+        
+        switch (backupChoice) {
+            case 1:
+                System.out.print("Enter backup folder name: ");
+                String backupFolder = scanner.nextLine();
+                BackupManager.backup(backupFolder);
+                break;
+                
+            case 2:
+                System.out.print("Enter backup file path: ");
+                String restoreFile = scanner.nextLine();
+                BackupManager.restore(restoreFile, true);
+                break;
+                
+            case 3:
+                System.out.print("Enter backup file path: ");
+                String appendFile = scanner.nextLine();
+                BackupManager.restore(appendFile, false);
+                break;
+                
+            default:
+                System.out.println("Invalid backup option.");
+        }
     }
 }

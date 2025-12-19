@@ -1,6 +1,7 @@
 //Shahitya shri
 
-package FOPfinal.src.main.java;
+package src.fopassignment;
+
 import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
@@ -100,6 +101,7 @@ static class Event {
          catch(IOException e){
              System.out.println("Error writing file");
          }
+        sc.close();
     }
 
     static void recurring(Event[][] events, Event ev, int month, int day,String interval, int x){
@@ -138,6 +140,40 @@ static class Event {
        }        
      }  
    }
+
+   public static void recurringEventsMenu(Scanner scanner) {
+    System.out.println("\n--- RECURRING EVENTS ---");
+    System.out.println("Note: This feature requires an existing event to make recurring.");
+    System.out.println("Please create an event first using Event Management.");
+    
+    System.out.print("Enter Event ID to make recurring: ");
+    
+    if (!scanner.hasNextInt()) {
+        System.out.println("Invalid input. Please enter a number.");
+        return;
+    }
+    
+    int eventId = scanner.nextInt();
+    scanner.nextLine();
+
+    System.out.print("Enter event title: ");
+    String title = scanner.nextLine();
+    
+    System.out.print("Enter event start date/time (yyyy-MM-ddTHH:mm:ss): ");
+    String dateTimeStr = scanner.nextLine();
+
+    System.out.print("Enter end date (yyyy-MM-dd): ");
+    String endDate = scanner.nextLine();
+    
+    try {
+        java.time.LocalDateTime dateTime = java.time.LocalDateTime.parse(dateTimeStr);
+        RecurringHandling(eventId, dateTimeStr, endDate, title);
+        System.out.println("Recurring event settings saved!");
+    } catch (Exception e) {
+        System.out.println("Invalid date/time format. Please use yyyy-MM-ddTHH:mm:ss format.");
+        System.out.println("Example: 2025-12-25T14:30:00");
+    }
+}
 }
 //18.12.2025    
 

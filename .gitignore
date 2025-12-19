@@ -26,3 +26,6 @@ replay_pid*
 .vscode/
 *.class
 javafx-sdk*
+
+*.class
+.DS_Store
