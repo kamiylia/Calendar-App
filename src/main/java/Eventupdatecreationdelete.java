@@ -1,18 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package src.main.java.fopassignment;
+package FOPfinal.src.main.java;
+
 import java.io.*;
 import java.util.Scanner;
 
-public class EventManager {
+public class Eventupdatecreationdelete {
     
     // File paths - using relative paths 
     private static final String EVENT_FILE = "event.csv";
     
     // Main method with menu system
-    public static void EventManaging(String[] args) {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
         
@@ -58,15 +55,8 @@ public class EventManager {
     public static void createEvent(Scanner scanner) {//create event method
         System.out.println("\n-- CREATE NEW EVENT ---");
         
-        System.out.println("Enter Event ID: ");
-        int newEventId = scanner.nextInt();
-        scanner.nextLine(); //Clear the buffer
-        
-        // Check if ID already exists
-        if (eventIdExists(newEventId)) {
-            System.out.println("Error: Event ID " + newEventId + " already exists!");
-            return;  // Exit the method
-        }
+        int newEventId = generateEventId();
+        scanner.nextLine();
         
         System.out.println("Enter event title: ");
         String title = scanner.nextLine();
@@ -79,7 +69,9 @@ public class EventManager {
     
         System.out.println("Enter end date/time (yyyy-MM-ddTHH:mm:ss): "); 
          String endDateTime = scanner.nextLine();
-       
+         
+        RecurringEvents.RecurringHandling(newEventId, startDateTime, endDateTime, title);
+           
         String eventEntry = newEventId + "," + title + "," + description + "," + startDateTime + "," + endDateTime;
     
         try {
@@ -91,6 +83,18 @@ public class EventManager {
             System.out.println("Error saving event: " + e.getMessage());  
         }
     }
+    //=========auto genereate event id============
+    private static int generateEventId() {
+    int id = 1;
+    try (BufferedReader br = new BufferedReader(new FileReader(EVENT_FILE))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] p = line.split(",");
+            id = Math.max(id, Integer.parseInt(p[0]) + 1);
+        }
+    } catch (IOException ignored) {}
+    return id;
+  }
     // =================== VIEW EVENT ===================
 public static void viewAllEvents() {//view event method  
     System.out.println("\n-- ALL EVENTS ---");  
@@ -189,11 +193,11 @@ public static void viewAllEvents() {//view event method
                         String newDescription = scanner.nextLine();
                         if (newDescription.isEmpty()) newDescription = parts[2];
                         
-                        System.out.println("Enter new start time (yyyy-MM-ddTHH:mm:ss): ");
+                        System.out.println("Enter new start time (yyyy-MM-dd HH:mm): ");
                         String newStart = scanner.nextLine();
                         if (newStart.isEmpty()) newStart = parts[3];
                         
-                        System.out.println("Enter new end time (yyyy-MM-ddTHH:mm:ss): ");
+                        System.out.println("Enter new end time (yyyy-MM-dd HH:mm): ");
                         String newEnd = scanner.nextLine();
                         if (newEnd.isEmpty()) newEnd = parts[4];
                         
@@ -325,3 +329,4 @@ public static void viewAllEvents() {//view event method
         return false;  // ID not found
     }
 }
+
