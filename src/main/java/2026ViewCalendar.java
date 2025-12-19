@@ -1,4 +1,4 @@
-package src.main.java.fopassignment;
+package FOPfinal.src.main.java;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -7,36 +7,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author LENOVO
- */
-public class ViewCalendar {
-    private List<Calender_Event> events; // creates a master list where it is an empty filing cabinet where all the appointments will be stored
-    
-    // Fixed capitalization to match your usage in methods
-    // instead of typing the data style, everytime, create a stamp to keep things consistent
+
+class App {
+    private List<Calender_Event> events; 
     private static final DateTimeFormatter DAY_DATE_FORMATTER = DateTimeFormatter.ofPattern("EEE dd");
     private static final DateTimeFormatter MONTH_YEAR_FORMATTER = DateTimeFormatter.ofPattern("MMM yyyy");
 
-    public ViewCalendar() {
-        this.events = new ArrayList<>(); // Initializes storage list
+    public App() {
+        this.events = new ArrayList<>(); // Initializes the master list
         
-        // Adding sample events to make sure the output is not empty while test run
+        // Example Events for 2025
         events.add(new Calender_Event(LocalDate.of(2025, 10, 5), LocalTime.of(11, 0), "Assignment Meeting"));
         events.add(new Calender_Event(LocalDate.of(2025, 10, 7), LocalTime.of(15, 0), "Project Discussion"));
         events.add(new Calender_Event(LocalDate.of(2025, 10, 20), LocalTime.of(9, 30), "Team Checkpoint"));
+        
+        // New Year 2026 Event to test the year view markers
+        events.add(new Calender_Event(LocalDate.of(2026, 1, 1), LocalTime.of(0, 1), "New Year's Day"));
     }
 
+    // --- REMINDER LOGIC ---
     public void checkAndPrintReminders() {
         System.out.println("\n" + "---".repeat(15));
         System.out.println("REMINDER NOTIFICATIONS");
         System.out.println("---".repeat(15));
         
-        Duration reminderThreshold = Duration.ofDays(1); // setting a notification rule. if the event is within 24 hours, remind me.
-        LocalDateTime now = LocalDateTime.now(); // checking the computer's clock to see the exact time it is right now.
+        Duration reminderThreshold = Duration.ofDays(1); // 24-hour window
+        LocalDateTime now = LocalDateTime.now(); 
         
         List<Calender_Event> reminders = this.events.stream()
-                .filter(event -> { // this works like a sieve where the program only keeps the events that are in the future and within the next 24 hours
+                .filter(event -> {
                     LocalDateTime startTime = event.getStartTime();
                     if (startTime.isBefore(now)) return false; 
                     Duration timeUntilEvent = Duration.between(now, startTime);
@@ -60,6 +59,7 @@ public class ViewCalendar {
         System.out.println("---".repeat(15));
     }
 
+    // --- CALENDAR VIEWS ---
     private List<Calender_Event> getEventsOnDate(LocalDate date) {
         return events.stream()
                 .filter(e -> e.getDate().isEqual(date))
@@ -68,24 +68,19 @@ public class ViewCalendar {
     }
 
     public void print_weekly_list_view(LocalDate startOfWeek) {
-        // Fixed: changed 'startofWeek' to 'startOfWeek' to match parameter
         LocalDate sunday = startOfWeek.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
-        
-        System.out.println("// Weekly List View");
+        System.out.println("\n// Weekly List View");
         System.out.println("~~~~~ Week of " + sunday.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " ~~~~~");
         
         for (int i = 0; i < 7; i++) {
             LocalDate currentDate = sunday.plusDays(i);
             List<Calender_Event> dailyEvents = getEventsOnDate(currentDate);
-            
             String dayLine = currentDate.format(DAY_DATE_FORMATTER) + ": ";
             
             if (dailyEvents.isEmpty()) {
                 dayLine += "No events";
             } else {
-                dayLine += dailyEvents.stream()
-                        .map(Calender_Event::toString)
-                        .collect(Collectors.joining(", "));
+                dayLine += dailyEvents.stream().map(Calender_Event::toString).collect(Collectors.joining(", "));
             }
             System.out.println(dayLine);
         }
@@ -94,12 +89,13 @@ public class ViewCalendar {
     public void printmonthly_calendar_view(YearMonth month) {
         System.out.println("\n// Calendar month view");
         System.out.println(month.format(MONTH_YEAR_FORMATTER));
-        System.out.println("Sun || Mon || Tue || Wed || Thu || Fri || Sat");
+        System.out.println("  Sun  ||  Mon  ||  Tue  ||  Wed  ||  Thu ||  Fri  ||  Sat   ");
 
         LocalDate firstOfMonth = month.atDay(1);
         int daysInMonth = month.lengthOfMonth();
         int firstDayOfWeekValue = firstOfMonth.getDayOfWeek().getValue() % 7;
 
+        // Leading spaces (4 spaces per day to match fixed-width days)
         for (int i = 0; i < firstDayOfWeekValue; i++) {
             System.out.print("    "); 
         }
@@ -108,65 +104,40 @@ public class ViewCalendar {
             LocalDate currentDate = month.atDay(currentDay);
             boolean hasEvents = !getEventsOnDate(currentDate).isEmpty();
             
-            // Step 1: Format the number to always take 2 spaces (e.g., " 5" or "10")
-            String dayString = String.format("%2d", currentDay);
-            
-            // Step 2: Add the event marker OR a blank space so the total width is always 3
-            if (hasEvents) {
-                System.out.print(dayString + "* "); // Width: 3 characters + 1 space
-        } else {
-                System.out.print(dayString + "  "); // Width: 3 characters + 1 space
-    }
-            
+            // Fixed-width alignment: 2 spaces for number + 1 space for marker + 1 space for gap
+            String dayString = String.format("%6d", currentDay);
+            System.out.print(dayString + (hasEvents ? "* " : "  "));
+
+            // Start a new line after Saturday
             if ((currentDate.getDayOfWeek() == DayOfWeek.SATURDAY) || currentDay == daysInMonth) {
                 System.out.println();
             }
         }
     }
 
-    public static void CalendarViewing(String[] args) {
-        ViewCalendar app = new ViewCalendar();
+    public void printYearlyCalendarView(int year) {
+        System.out.println("\n" + "=".repeat(45));
+        System.out.println("          FULL YEAR CALENDAR: " + year);
+        System.out.println("=".repeat(45));
+
+        for (int m = 1; m <= 12; m++) {
+            printmonthly_calendar_view(YearMonth.of(year, m));
+            System.out.println("-".repeat(45));
+        }
+    }
+
+    public static void main(String[] args) {
+        App app = new App();
+        
+        // 1. Reminders
         app.checkAndPrintReminders();
         
-        System.out.println("\n" + "=".repeat(45) + "\n");
+        // 2. Weekly View
+        app.print_weekly_list_view(LocalDate.of(2025, 10, 5));
         
-        LocalDate weekStart = LocalDate.of(2025, 10, 5);
-        app.print_weekly_list_view(weekStart);
-        
-        System.out.println("\n" + "~~~~~".repeat(15) + "\n");
-        
-        YearMonth monthToView = YearMonth.of(2025, 10);
-        app.printmonthly_calendar_view(monthToView);
+        // 3. Yearly View (2026)
+        app.printYearlyCalendarView(2026);
     }
 }
 
-// REMOVED 'public' keyword so it can live in the same file
-class Calender_Event {
-    private LocalDate date;
-    private LocalTime time;
-    private String description;
-    
-    public Calender_Event(LocalDate date, LocalTime time, String description) {
-        this.date = date;
-        this.time = time;
-        this.description = description;
-    }
-    
-    public LocalDateTime getStartTime() {
-        return LocalDateTime.of(this.date, this.time);
-    }
-    
-    public LocalDate getDate() { return date; }
-    public LocalTime getTime() { return time; }
-    public String getDescription() { return description; }
-    
-    public String getFormattedTime() {
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-        return "(" + time.format(timeFormatter) + ")";
-    }
-    
-    @Override
-    public String toString() {
-        return description + " " + getFormattedTime();
-    }
-}
+

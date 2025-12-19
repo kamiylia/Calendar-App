@@ -1,32 +1,42 @@
 //Shahitya shri
 
-package src.main.java.fopassignment;
+package FOPfinal.src.main.java;
 import java.util.Scanner;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class RecurringEvents{
-    
-    static class Event {
-        int eventId;
-        String title;
-        String recurrentInterval;
-        int recurrentTimes;
-        String recurrentEndDate;
+static class Event {
+    int eventId;
+    String title;
+    String recurrentInterval;
+    int recurrentTimes;
+    String recurrentEndDate;
 
-        public Event(int id, String title) {
-            this.eventId = id;
-            this.title = title;
-            this.recurrentInterval = "0";
-            this.recurrentTimes = 0;
-            this.recurrentEndDate = "0";
-        }
+    public Event(int id, String title) {
+        this.eventId = id;
+        this.title = title;
+        this.recurrentInterval = "0";
+        this.recurrentTimes = 0;
+        this.recurrentEndDate = "0";
     }
-    public static void RecurringHandling(int eventID, LocalDateTime date) {
-       Scanner sc = new Scanner(System.in);
-        Event ev = new Event(eventID, "Event " + eventID);
+}
+
+    public static void RecurringHandling(int eventID, String date, String endDate, String title) {
+        Scanner sc = new Scanner(System.in);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        LocalDateTime dt = LocalDateTime.parse(date, formatter);
+
+        int month = dt.getMonthValue() - 1;
+        int day   = dt.getDayOfMonth() - 1;
+        
+        Event events[][]= new Event[12][31];
+        Event ev = new Event(eventID,title);
+        events[month][day] = ev;
         
         System.out.println("\nRecurring events");
         System.out.println("1- No repetition");
@@ -54,25 +64,29 @@ public class RecurringEvents{
                 ev.recurrentEndDate = "0";
             }
             else if(a==2){
-                System.out.println("Enter end date(YYYY-MM-DD) :");
-                ev.recurrentEndDate = sc.nextLine().trim();  //had whitespace before so had to add .trim()
+                LocalDate end = LocalDateTime.parse(endDate,DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm") ).toLocalDate();
+                ev.recurrentEndDate = end.toString(); // store as String
                 ev.recurrentTimes = 0;
+                sc.nextLine();
             }
         }    
     
+        int x=0;
+        String interval;
         switch(repeat){
             case 1 : break;
             case 2 :ev.recurrentInterval = "1m";
-                    // recurring functionality would be implemented here
-                    break;
+                    interval = "monthly";
+                    recurring(events,ev,month,day,interval,x); break;
             case 3 :ev.recurrentInterval = "1w";
-                    // recurring functionality would be implemented here
-                    break;
+                    interval = "daily";
+                    x = 7;
+                    recurring(events,ev,month,day,interval,x); break;
             case 4 : System.out.println("Enter how many days interval before next event: ");
-                    int x = sc.nextInt();
+                    x = sc.nextInt();
+                    interval = "daily";
                     ev.recurrentInterval = x+"d";
-                    // recurring functionality would be implemented here
-                    break;
+                    recurring(events,ev,month,day,interval,x); break;
             default : break;
         }
         sc.nextLine();
@@ -84,14 +98,13 @@ public class RecurringEvents{
          fw.close();
          }
          catch(IOException e){
-             System.out.println("Error writing file: " + e.getMessage());
+             System.out.println("Error writing file");
          }
-         
-         sc.close();
     }
-    
-    static void recurring(Event[][] events, Event ev, int month, int day, String interval, int x){
+
+    static void recurring(Event[][] events, Event ev, int month, int day,String interval, int x){
        
+    
         LocalDate nextDate = LocalDate.of(2026, month+1, day+1);
         int counter = 0;
         

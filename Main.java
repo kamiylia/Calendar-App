@@ -1,4 +1,9 @@
-import src.main.java.fopassignment.*;
+package FOPfinal;
+import FOPfinal.src.main.java.ReminderManager;
+import FOPfinal.src.main.java.EventSearch;
+import FOPfinal.src.main.java.EventManager;
+import FOPfinal.src.main.java.ViewCalendar;
+import FOPfinal.src.main.java.BackupManager;
 import java.util.Scanner;
 import java.time.YearMonth;
 import java.time.LocalDate;
