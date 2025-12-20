@@ -29,3 +29,5 @@ javafx-sdk*
 
 *.class
 .DS_Store
+
+*.class
