@@ -1,4 +1,4 @@
-package src.fopassignment;
+package fopassignment;
 
 import java.io.*;
 import java.nio.file.*;

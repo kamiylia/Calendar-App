@@ -1,6 +1,6 @@
 //Shahitya shri
 
-package src.fopassignment;
+package fopassignment;
 
 import java.util.Scanner;
 import java.time.LocalDateTime;

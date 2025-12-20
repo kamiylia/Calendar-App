@@ -1,6 +1,6 @@
 //Tigi
 
-package src.fopassignment;
+package fopassignment;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;

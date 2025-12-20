@@ -1,6 +1,6 @@
 //KamiliaAhlamTaqi
 
-package src.fopassignment;
+package fopassignment;
 
 import java.util.Scanner;
 
