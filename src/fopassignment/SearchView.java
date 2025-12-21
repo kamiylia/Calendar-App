@@ -11,6 +11,8 @@ public class SearchView extends VBox {
     public SearchView() {
 
         Label title = new Label("Search Event");
+        title.getStyleClass().add("title");
+
 
         inputField = new TextField();
         inputField.setPromptText("Enter date (YYYY-MM-DD) or keyword");

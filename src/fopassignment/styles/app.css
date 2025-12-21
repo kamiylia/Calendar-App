@@ -1,0 +1,44 @@
+/* ===== ROOT ===== */
+.root {
+    -fx-font-family: "Segoe UI", "Arial";
+    -fx-background-color: #f5f7fa;
+}
+
+/* ===== TITLES ===== */
+.label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #1e293b;
+    -fx-font-weight: bold;
+}
+
+/* ===== BUTTONS ===== */
+.button {
+    -fx-background-color: #46743b;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 8 18;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #46743b;
+}
+
+/* ===== TEXT INPUT ===== */
+.text-field,
+.text-area {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: #cbd5e1;
+}
+
+/* ===== COMBO BOX ===== */
+.combo-box {
+    -fx-background-radius: 6;
+}
+
+.title {
+    -fx-font-size: 20px;
+    -fx-text-fill: #0f172a;
+}

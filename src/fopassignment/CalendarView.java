@@ -9,6 +9,8 @@ public class CalendarView extends VBox {
     public CalendarView() {
 
         Label title = new Label("View Calendar");
+        title.getStyleClass().add("title");
+
 
         ComboBox<String> monthBox = new ComboBox<>();
         monthBox.getItems().addAll(

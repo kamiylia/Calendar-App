@@ -11,12 +11,10 @@ public class MainMenuView extends VBox {
         Button calendarBtn = new Button("View Calendar");
         Button exitBtn = new Button("Exit");
 
-        searchBtn.setOnAction(e -> FxMain.showSearchView());
-        calendarBtn.setOnAction(e -> FxMain.showCalendarView());
-        exitBtn.setOnAction(e -> System.exit(0));
-
-        setSpacing(15);
+        setSpacing(20);
+        setPrefSize(400, 300);
         setStyle("-fx-padding: 20;");
+
         getChildren().addAll(searchBtn, calendarBtn, exitBtn);
     }
 }

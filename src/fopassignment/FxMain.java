@@ -2,6 +2,9 @@ package fopassignment;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class FxMain extends Application {
@@ -16,20 +19,58 @@ public class FxMain extends Application {
         stage.show();
     }
 
-    public static void showMainMenu() {
-        Scene scene = new Scene(new MainMenuView(), 400, 300);
+    // ===== SCREEN 1: MAIN MENU =====
+    static void showMainMenu() {
+        Button searchBtn = new Button("Search Event");
+        Button calendarBtn = new Button("View Calendar");
+        Button exitBtn = new Button("Exit");
+
+        searchBtn.setOnAction(e -> showSearchView());
+        calendarBtn.setOnAction(e -> showCalendarView());
+        exitBtn.setOnAction(e -> System.exit(0));
+
+        VBox root = new VBox(20, searchBtn, calendarBtn, exitBtn);
+        root.setStyle("-fx-padding: 20;");
+
+        Scene scene = new Scene(root, 400, 300);
+        applyStyles(scene);
+        mainStage.setScene(scene);
+
+    }
+
+    // ===== SCREEN 2: SEARCH VIEW =====
+    static void showSearchView() {
+        Label label = new Label("Search View (Coming Soon)");
+        Button backBtn = new Button("Back");
+
+        backBtn.setOnAction(e -> showMainMenu());
+
+        VBox root = new VBox(20, label, backBtn);
+        root.setStyle("-fx-padding: 20;");
+
+        Scene scene = new Scene(root, 400, 300);
+        applyStyles(scene);
         mainStage.setScene(scene);
     }
 
-    public static void showSearchView() {
-        Scene scene = new Scene(new SearchView(), 400, 300);
+    // ===== SCREEN 3: CALENDAR VIEW =====
+    static void showCalendarView() {
+        VBox root = new VBox(20);
+        root.getChildren().add(new Label("Calendar View"));
+    
+        Scene scene = new Scene(root, 400, 300);
+        applyStyles(scene);
         mainStage.setScene(scene);
     }
+    
 
-    public static void showCalendarView() {
-        Scene scene = new Scene(new CalendarView(), 400, 300);
-        mainStage.setScene(scene);
+    private static void applyStyles(Scene scene) {
+        scene.getStylesheets().add(
+            FxMain.class.getResource("/fopassignment/styles/app.css").toExternalForm()
+        );
     }
+    
+    
 
     public static void main(String[] args) {
         launch(args);
