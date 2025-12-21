@@ -48,10 +48,7 @@ public class FxMain extends Application {
 
     // ===== SCREEN 3: CALENDAR VIEW =====
     static void showCalendarView() {
-        VBox root = new VBox(20);
-        root.getChildren().add(new Label("Calendar View"));
-    
-        Scene scene = new Scene(root, 400, 300);
+        Scene scene = new Scene(new CalendarView(), 400, 300);
         applyStyles(scene);
         mainStage.setScene(scene);
     }
@@ -62,7 +59,6 @@ public class FxMain extends Application {
             FxMain.class.getResource("/fopassignment/styles/app.css").toExternalForm()
         );
     }
-    
     
 
     public static void main(String[] args) {
