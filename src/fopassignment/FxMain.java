@@ -40,18 +40,11 @@ public class FxMain extends Application {
 
     // ===== SCREEN 2: SEARCH VIEW =====
     static void showSearchView() {
-        Label label = new Label("Search View (Coming Soon)");
-        Button backBtn = new Button("Back");
-
-        backBtn.setOnAction(e -> showMainMenu());
-
-        VBox root = new VBox(20, label, backBtn);
-        root.setStyle("-fx-padding: 20;");
-
-        Scene scene = new Scene(root, 400, 300);
+        Scene scene = new Scene(new SearchView(), 400, 300);
         applyStyles(scene);
         mainStage.setScene(scene);
     }
+    
 
     // ===== SCREEN 3: CALENDAR VIEW =====
     static void showCalendarView() {
