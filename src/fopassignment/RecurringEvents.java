@@ -26,8 +26,7 @@ static class Event {
     }
 }
 
-    public static void RecurringHandling(int eventID, String date, String endDate, String title) {
-        Scanner sc = new Scanner(System.in);
+    public static void RecurringHandling(Scanner sc, int eventID, String date, String endDate, String title) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
         LocalDateTime dt = LocalDateTime.parse(date, formatter);
@@ -102,7 +101,7 @@ static class Event {
          catch(IOException e){
              System.out.println("Error writing file");
          }
-        sc.close();
+        
     }
 
     static void recurring(Event[][] events, Event ev, int month, int day,String interval, int x){
@@ -142,19 +141,7 @@ static class Event {
      }  
    }
 
-   public static void recurringEventsMenu(Scanner scanner) {
-        System.out.println("\n--- RECURRING EVENTS ---");
-        System.out.println("Note: This feature requires an existing event to make recurring.");
-        System.out.println("Please create an event first using Event Management.");
-        
-        System.out.print("Enter Event ID to make recurring: ");
-        
-        if (!scanner.hasNextInt()) {
-            System.out.println("Invalid input. Please enter a number.");
-            return;
-        }
-    
-    }
+   
 }
 //18.12.2025    
 

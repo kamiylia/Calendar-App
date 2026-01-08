@@ -2,6 +2,8 @@ package fopassignment;
 
 import java.io.*;
 import java.util.Scanner;
+import fopassignment.EventSearch;
+
 
 public class Eventupdatecreationdelete {
     
@@ -70,8 +72,12 @@ public class Eventupdatecreationdelete {
         System.out.println("Enter end date/time (yyyy-MM-ddTHH:mm:ss): "); 
          String endDateTime = scanner.nextLine();
          
-        RecurringEvents.RecurringHandling(newEventId, startDateTime, endDateTime, title);
-           
+        RecurringEvents.RecurringHandling(scanner, newEventId, startDateTime, endDateTime, title);
+
+        // ===== ADD EVENT TO EVENTSEARCH (IN-MEMORY) =====
+        EventSearch.events[EventSearch.eventCount++] =
+        new EventSearch.Event(newEventId, title, startDateTime);
+
         String eventEntry = newEventId + "," + title + "," + description + "," + startDateTime + "," + endDateTime;
     
         try {
@@ -370,6 +376,6 @@ public static void viewAllEvents() {//view event method
                     System.out.println("Invalid choice. Please try again.");
             }
         }
-    }
+    }    
 }
 
