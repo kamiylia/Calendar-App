@@ -28,7 +28,7 @@ static class Event {
 
     public static void RecurringHandling(int eventID, String date, String endDate, String title) {
         Scanner sc = new Scanner(System.in);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
         LocalDateTime dt = LocalDateTime.parse(date, formatter);
 
@@ -65,7 +65,7 @@ static class Event {
                 ev.recurrentEndDate = "0";
             }
             else if(a==2){
-                LocalDate end = LocalDateTime.parse(endDate,DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm") ).toLocalDate();
+                LocalDate end = LocalDateTime.parse(endDate,DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss") ).toLocalDate();
                 ev.recurrentEndDate = end.toString(); // store as String
                 ev.recurrentTimes = 0;
                 sc.nextLine();

@@ -70,7 +70,7 @@ public class Eventupdatecreationdelete {
         System.out.println("Enter end date/time (yyyy-MM-ddTHH:mm:ss): "); 
          String endDateTime = scanner.nextLine();
          
-        // RecurringEvents functionality would be added here if needed
+        RecurringEvents.RecurringHandling(newEventId, startDateTime, endDateTime, title);
            
         String eventEntry = newEventId + "," + title + "," + description + "," + startDateTime + "," + endDateTime;
     
