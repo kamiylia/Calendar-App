@@ -2,19 +2,22 @@ package fopassignment;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.geometry.Pos;
+
 
 public class MainMenuView extends VBox {
 
     public MainMenuView() {
+        setSpacing(15);
+        setAlignment(Pos.CENTER);
+        setStyle("-fx-padding: 20;");
 
-        Button searchBtn = new Button("Search Event");
         Button calendarBtn = new Button("View Calendar");
         Button exitBtn = new Button("Exit");
 
-        setSpacing(20);
-        setPrefSize(400, 300);
-        setStyle("-fx-padding: 20;");
+        calendarBtn.setOnAction(e -> FxMain.showCalendarView());
+        exitBtn.setOnAction(e -> System.exit(0));
 
-        getChildren().addAll(searchBtn, calendarBtn, exitBtn);
+        getChildren().addAll(calendarBtn, exitBtn);
     }
 }

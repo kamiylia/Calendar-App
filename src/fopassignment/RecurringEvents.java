@@ -53,7 +53,7 @@ static class Event {
             break;
         System.out.println("Invalid choice. Try again :");
         }
-        if(repeat>=1&&repeat<=5){
+        if(repeat>1&&repeat<=4){
             System.out.println("Choose: ");
             System.out.println("1. Repeats X times");
             System.out.println("2. Ends at specific date");

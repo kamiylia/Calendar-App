@@ -330,6 +330,7 @@ public static void viewAllEvents() {//view event method
     }
 
     public static void eventManagement(Scanner scanner) {
+        scanner.nextLine();
         boolean eventRunning = true;
         
         while (eventRunning) {
