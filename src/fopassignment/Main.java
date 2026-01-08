@@ -17,10 +17,9 @@ public class Main {
             System.out.println("1. Event Management (Create/View/Update/Delete)");
             System.out.println("2. Event Search");
             System.out.println("3. View Calendar");
-            System.out.println("4. Recurring Events");
-            System.out.println("5. Check Reminders");
-            System.out.println("6. Backup & Restore");
-            System.out.println("7. Exit");
+            System.out.println("4. Check Reminders");
+            System.out.println("5. Backup & Restore");
+            System.out.println("6. Exit");
             System.out.print("Choose option (1-7): ");
             
             if (!scanner.hasNextInt()) {
@@ -35,7 +34,7 @@ public class Main {
             switch (choice) {
                 case 1:
                     // Event Management
-                    Eventupdatecreationdelete.eventManagement(scanner);;
+                    Eventupdatecreationdelete.eventManagement(scanner);
                     break;
                     
                 case 2:
@@ -49,21 +48,16 @@ public class Main {
                     break;
                     
                 case 4:
-                    // Recurring Events
-                    RecurringEvents.recurringEventsMenu(scanner);
-                    break;
-                    
-                case 5:
                     // Check Reminders
                     ReminderManager.checkReminders();
                     break;
                     
-                case 6:
+                case 5:
                     // Backup & Restore
                     BackupManager.backupRestore(scanner);
                     break;
                     
-                case 7:
+                case 6:
                     running = false;
                     System.out.println("Thank you for using Calendar App. Goodbye!");
                     break;
