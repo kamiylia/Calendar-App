@@ -54,41 +54,49 @@ public class Eventupdatecreationdelete {
     }
     
     // =================== CREATE EVENT ===================
-    public static void createEvent(Scanner scanner) {//create event method
-        System.out.println("\n-- CREATE NEW EVENT ---");
-        
-        int newEventId = generateEventId();
-        scanner.nextLine();
-        
-        System.out.println("Enter event title: ");
+    public static void createEvent(Scanner scanner) {
+
+        System.out.println("\n-- CREATE NEW EVENT --");
+    
+        int newEventId = generateEventId(); // assumes this already works
+    
+        // ===== READ INPUT (SAFE) =====
+        System.out.print("Enter event title: ");
         String title = scanner.nextLine();
-        
-        System.out.println("Enter event description: ");
+    
+        System.out.print("Enter event description: ");
         String description = scanner.nextLine();
-        
-        System.out.println("Enter start date/time (yyyy-MM-ddTHH:mm:ss) Example: (2024-12-25T14:30:45): ");  
+    
+        System.out.print("Enter start date & time (YYYY-MM-DDTHH:MM): ");
         String startDateTime = scanner.nextLine();
     
-        System.out.println("Enter end date/time (yyyy-MM-ddTHH:mm:ss): "); 
-         String endDateTime = scanner.nextLine();
-         
-        RecurringEvents.RecurringHandling(scanner, newEventId, startDateTime, endDateTime, title);
-
-        // ===== ADD EVENT TO EVENTSEARCH (IN-MEMORY) =====
-        EventSearch.events[EventSearch.eventCount++] =
-        new EventSearch.Event(newEventId, title, startDateTime);
-
-        String eventEntry = newEventId + "," + title + "," + description + "," + startDateTime + "," + endDateTime;
+        System.out.print("Enter end date & time (YYYY-MM-DDTHH:MM): ");
+        String endDateTime = scanner.nextLine();
     
-        try {
-            FileWriter writer = new FileWriter(EVENT_FILE, true);
-            writer.write(eventEntry + "\n");
-            writer.close();
-            System.out.println("Event successfully created!"); 
+        // ===== WRITE TO CSV (MATCHES EventSearch) =====
+        try (FileWriter fw = new FileWriter("event.csv", true)) {
+    
+            fw.write(
+                newEventId + "," +
+                title + "," +
+                description + "," +
+                startDateTime + "," +
+                endDateTime + "\n"
+            );
+    
+            System.out.println("Event created successfully.");
+    
         } catch (IOException e) {
-            System.out.println("Error saving event: " + e.getMessage());  
+            System.out.println("Error saving event.");
+            return;
         }
+    
+        // ===== OPTIONAL: recurring handling (if you already have it) =====
+        RecurringEvents.RecurringHandling(
+            scanner, newEventId, startDateTime, endDateTime, title
+        );
     }
+    
     //=========auto genereate event id============
     private static int generateEventId() {
     int id = 1;
