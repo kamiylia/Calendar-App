@@ -23,43 +23,43 @@ public class ViewCalendar {
         this.events = new ArrayList<>(); // Initializes storage list
         
         // Adding sample events to make sure the output is not empty while test run
-        events.add(new Calender_Event(LocalDate.of(2025, 10, 5), LocalTime.of(11, 0), "Assignment Meeting"));
-        events.add(new Calender_Event(LocalDate.of(2025, 10, 7), LocalTime.of(15, 0), "Project Discussion"));
-        events.add(new Calender_Event(LocalDate.of(2025, 10, 20), LocalTime.of(9, 30), "Team Checkpoint"));
+        // events.add(new Calender_Event(LocalDate.of(2025, 10, 5), LocalTime.of(11, 0), "Assignment Meeting"));
+        // events.add(new Calender_Event(LocalDate.of(2025, 10, 7), LocalTime.of(15, 0), "Project Discussion"));
+        // events.add(new Calender_Event(LocalDate.of(2025, 10, 20), LocalTime.of(9, 30), "Team Checkpoint"));
     }
 
-    public void checkAndPrintReminders() {
-        System.out.println("\n" + "---".repeat(15));
-        System.out.println("REMINDER NOTIFICATIONS");
-        System.out.println("---".repeat(15));
+    // public void checkAndPrintReminders() {
+    //     System.out.println("\n" + "---".repeat(15));
+    //     System.out.println("REMINDER NOTIFICATIONS");
+    //     System.out.println("---".repeat(15));
         
-        Duration reminderThreshold = Duration.ofDays(1); // setting a notification rule. if the event is within 24 hours, remind me.
-        LocalDateTime now = LocalDateTime.now(); // checking the computer's clock to see the exact time it is right now.
+    //     Duration reminderThreshold = Duration.ofDays(1); // setting a notification rule. if the event is within 24 hours, remind me.
+    //     LocalDateTime now = LocalDateTime.now(); // checking the computer's clock to see the exact time it is right now.
         
-        List<Calender_Event> reminders = this.events.stream()
-                .filter(event -> { // this works like a sieve where the program only keeps the events that are in the future and within the next 24 hours
-                    LocalDateTime startTime = event.getStartTime();
-                    if (startTime.isBefore(now)) return false; 
-                    Duration timeUntilEvent = Duration.between(now, startTime);
-                    return timeUntilEvent.compareTo(reminderThreshold) <= 0;
-                })
-                .sorted((e1, e2) -> e1.getStartTime().compareTo(e2.getStartTime()))
-                .collect(Collectors.toList());
+    //     List<Calender_Event> reminders = this.events.stream()
+    //             .filter(event -> { // this works like a sieve where the program only keeps the events that are in the future and within the next 24 hours
+    //                 LocalDateTime startTime = event.getStartTime();
+    //                 if (startTime.isBefore(now)) return false; 
+    //                 Duration timeUntilEvent = Duration.between(now, startTime);
+    //                 return timeUntilEvent.compareTo(reminderThreshold) <= 0;
+    //             })
+    //             .sorted((e1, e2) -> e1.getStartTime().compareTo(e2.getStartTime()))
+    //             .collect(Collectors.toList());
 
-        if (reminders.isEmpty()) {
-            System.out.println("No events require an immediate reminder (within 24 hours).");
-        } else {
-            for (Calender_Event event : reminders) {
-                Duration timeUntilEvent = Duration.between(now, event.getStartTime());
-                long hours = timeUntilEvent.toHours();
-                long minutes = timeUntilEvent.toMinutes() % 60;
+    //     if (reminders.isEmpty()) {
+    //         System.out.println("No events require an immediate reminder (within 24 hours).");
+    //     } else {
+    //         for (Calender_Event event : reminders) {
+    //             Duration timeUntilEvent = Duration.between(now, event.getStartTime());
+    //             long hours = timeUntilEvent.toHours();
+    //             long minutes = timeUntilEvent.toMinutes() % 60;
                 
-                System.out.println("Your next event is coming soon in <" + hours + " hours, " + minutes + " minutes>: " 
-                        + event.getDescription() + " on " + event.getDate().toString() + " at " + event.getTime().toString());
-            }
-        }
-        System.out.println("---".repeat(15));
-    }
+    //             System.out.println("Your next event is coming soon in <" + hours + " hours, " + minutes + " minutes>: " 
+    //                     + event.getDescription() + " on " + event.getDate().toString() + " at " + event.getTime().toString());
+    //         }
+    //     }
+    //     System.out.println("---".repeat(15));
+    // }
 
     private List<Calender_Event> getEventsOnDate(LocalDate date) {
         return events.stream()
@@ -138,7 +138,7 @@ public class ViewCalendar {
     
     public static void CalendarViewing(String[] args) {
         ViewCalendar app = new ViewCalendar();
-        app.checkAndPrintReminders();
+        // app.checkAndPrintReminders();
         
         System.out.println("\n" + "=".repeat(45) + "\n");
         
@@ -185,9 +185,9 @@ public class ViewCalendar {
                 printYearlyCalendarView(calendar, 2026);
                 break;
                 
-            case 4:
-                calendar.checkAndPrintReminders();
-                break;
+            // case 4:
+            //     calendar.checkAndPrintReminders();
+            //     break;
                 
             default:
                 System.out.println("Invalid view option.");

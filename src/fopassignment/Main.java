@@ -9,9 +9,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
-        
+    
         System.out.println("=== CALENDAR AND SCHEDULER APP ===");
-        
+    
         while (running) {
             System.out.println("\n--- MAIN MENU ---");
             System.out.println("1. Event Management (Create/View/Update/Delete)");
@@ -20,53 +20,49 @@ public class Main {
             System.out.println("4. Check Reminders");
             System.out.println("5. Backup & Restore");
             System.out.println("6. Exit");
-            System.out.print("Choose option (1-7): ");
-            
-            if (!scanner.hasNextInt()) {
+            System.out.print("Choose option (1–6): ");
+    
+            String input = scanner.nextLine();
+            int choice;
+    
+            try {
+                choice = Integer.parseInt(input);
+            } catch (Exception e) {
                 System.out.println("Invalid input. Please enter a number.");
-                scanner.nextLine(); // consume invalid input
                 continue;
             }
-            
-            int choice = scanner.nextInt();
-            scanner.nextLine();
-            
+    
             switch (choice) {
                 case 1:
-                    // Event Management
                     Eventupdatecreationdelete.eventManagement(scanner);
                     break;
-                    
+    
                 case 2:
-                    // Event Search functionality
                     EventSearch.searchEvents(scanner);
                     break;
-                    
+    
                 case 3:
-                    // View Calendar
                     ViewCalendar.viewHandling(scanner);
                     break;
-                    
+    
                 case 4:
-                    // Check Reminders
-                    ReminderManager.checkReminders();
+                    ReminderManager.checkReminders(scanner);   // IMPORTANT
                     break;
-                    
+    
                 case 5:
-                    // Backup & Restore
                     BackupManager.backupRestore(scanner);
                     break;
-                    
+    
                 case 6:
                     running = false;
                     System.out.println("Thank you for using Calendar App. Goodbye!");
                     break;
-                    
+    
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
         }
-        
+    
         scanner.close();
     }
-}
+}    

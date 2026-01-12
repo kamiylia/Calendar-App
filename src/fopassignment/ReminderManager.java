@@ -13,17 +13,24 @@ public class ReminderManager {
     private static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
-    public static void checkReminders() {
+    public static void checkReminders(Scanner sc) {
 
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("=== Reminder Settings ===");
+        System.out.println("\n=== Reminder Settings ===");
         System.out.println("1. 30 minutes before");
         System.out.println("2. 1 hour before");
         System.out.println("3. 1 day before");
         System.out.print("Choose option: ");
 
-        int choice = sc.nextInt();
+        String input = sc.nextLine();
+        int choice;
+
+        try {
+            choice = Integer.parseInt(input);
+        } catch (Exception e) {
+            System.out.println("Invalid input.");
+            return;
+        }
+
         long reminderMinutes;
 
         switch (choice) {
@@ -34,15 +41,15 @@ public class ReminderManager {
                 reminderMinutes = 60;
                 break;
             case 3:
-                reminderMinutes = 1440; // 1 day
+                reminderMinutes = 1440;
                 break;
             default:
-                System.out.println("Invalid choice. No reminders shown.");
-                sc.close();
+                System.out.println("Invalid choice.");
                 return;
         }
 
         LocalDateTime now = LocalDateTime.now();
+        boolean found = false;
 
         try (BufferedReader br = new BufferedReader(new FileReader(EVENT_FILE))) {
 
@@ -51,9 +58,7 @@ public class ReminderManager {
             while ((line = br.readLine()) != null) {
 
                 String[] parts = line.split(",");
-
-                if (parts.length < 5)
-                    continue;
+                if (parts.length < 5) continue;
 
                 String title = parts[1];
                 LocalDateTime startTime =
@@ -65,17 +70,20 @@ public class ReminderManager {
                 if (minutesUntilEvent > 0 &&
                         minutesUntilEvent <= reminderMinutes) {
 
-                    System.out.println("🔔 Reminder!");
+                    found = true;
+                    System.out.println("\n🔔 Reminder!");
                     System.out.println("Event: " + title);
                     System.out.println("Starts at: " + startTime);
-                    System.out.println("In " + minutesUntilEvent + " minutes\n");
+                    System.out.println("In " + minutesUntilEvent + " minutes");
                 }
             }
 
         } catch (Exception e) {
             System.out.println("Error reading events for reminders.");
         }
-        
-        sc.close();
+
+        if (!found) {
+            System.out.println("No upcoming events in selected reminder window.");
+        }
     }
 }

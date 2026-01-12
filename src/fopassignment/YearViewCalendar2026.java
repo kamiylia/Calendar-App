@@ -18,9 +18,9 @@ class YearViewCalendar2026 {
         this.events = new ArrayList<>(); // Initializes the master list
         
         // Example Events for 2025
-        events.add(new Calender_Event(LocalDate.of(2025, 10, 5), LocalTime.of(11, 0), "Assignment Meeting"));
-        events.add(new Calender_Event(LocalDate.of(2025, 10, 7), LocalTime.of(15, 0), "Project Discussion"));
-        events.add(new Calender_Event(LocalDate.of(2025, 10, 20), LocalTime.of(9, 30), "Team Checkpoint"));
+        // events.add(new Calender_Event(LocalDate.of(2025, 10, 5), LocalTime.of(11, 0), "Assignment Meeting"));
+        // events.add(new Calender_Event(LocalDate.of(2025, 10, 7), LocalTime.of(15, 0), "Project Discussion"));
+        // events.add(new Calender_Event(LocalDate.of(2025, 10, 20), LocalTime.of(9, 30), "Team Checkpoint"));
         
         // New Year 2026 Event to test the year view markers
         events.add(new Calender_Event(LocalDate.of(2026, 1, 1), LocalTime.of(0, 1), "New Year's Day"));

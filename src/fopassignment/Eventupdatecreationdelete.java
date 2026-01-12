@@ -27,6 +27,7 @@ public class Eventupdatecreationdelete {
             System.out.println("Enter your choice (1-5): ");
             
             int choice = scanner.nextInt(); //enter input
+            scanner.nextLine();
             
             // Selection structure
             switch (choice) {
@@ -247,6 +248,7 @@ public static void viewAllEvents() {//view event method
         
         System.out.print("Enter Event ID to delete: ");
         int eventId = scanner.nextInt();
+        scanner.nextLine();
         
         // Check if ID exists before deleting
         if (!eventIdExists(eventId)) {
