@@ -12,66 +12,26 @@ public class EventAdvancedSearch {
     private static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
-    // ========= MENU =========
-    public static void advancedSearchMenu() {
+    // ========= MONTH FILTER MENU =========
+    public static void advancedSearchMenu(Scanner sc) {
 
-        Scanner sc = new Scanner(System.in);
+        System.out.println("\n=== Filter Events By Month ===");
 
-        System.out.println("\n=== Advanced Event Search & Filter ===");
-        System.out.println("1. Search event by title");
-        System.out.println("2. Filter events by month");
-        System.out.print("Choose option: ");
+        int year;
+        int month;
 
-        int choice = sc.nextInt();
-        sc.nextLine(); // clear buffer
-
-        if (choice == 1) {
-            System.out.print("Enter title keyword: ");
-            searchByTitle(sc.nextLine());
-        } 
-        else if (choice == 2) {
+        try {
             System.out.print("Enter year (e.g. 2025): ");
-            int year = sc.nextInt();
+            year = Integer.parseInt(sc.nextLine());
 
-            System.out.print("Enter month (1-12): ");
-            int month = sc.nextInt();
-
-            filterByMonth(year, month);
-        } 
-        else {
-            System.out.println("Invalid choice.");
-        }
-        
-        sc.close();
-    }
-
-    // ========= SEARCH BY TITLE =========
-    private static void searchByTitle(String keyword) {
-
-        boolean found = false;
-
-        try (BufferedReader br = new BufferedReader(new FileReader(EVENT_FILE))) {
-
-            br.readLine(); // skip header
-            String line;
-
-            while ((line = br.readLine()) != null) {
-
-                String[] p = line.split(",");
-                if (p.length < 5) continue;
-
-                if (p[1].toLowerCase().contains(keyword.toLowerCase())) {
-                    printEvent(p);
-                    found = true;
-                }
-            }
-
+            System.out.print("Enter month (1–12): ");
+            month = Integer.parseInt(sc.nextLine());
         } catch (Exception e) {
-            System.out.println("Error reading event file.");
+            System.out.println("Invalid input. Please enter numbers only.");
+            return;
         }
 
-        if (!found)
-            System.out.println("No matching events found.");
+        filterByMonth(year, month);
     }
 
     // ========= FILTER BY MONTH =========
@@ -101,11 +61,12 @@ public class EventAdvancedSearch {
             }
 
         } catch (Exception e) {
-            System.out.println("Error filtering events.");
+            System.out.println("Error reading event file.");
         }
 
-        if (!found)
+        if (!found) {
             System.out.println("No events found for this month.");
+        }
     }
 
     // ========= PRINT EVENT =========

@@ -11,14 +11,17 @@ public class EventSearch {
 
     private static final String EVENT_FILE = "event.csv";
 
+    // ========= SEARCH BY DATE =========
     private static void searchByDate(String date) {
         boolean found = false;
 
         try (BufferedReader br = new BufferedReader(new FileReader(EVENT_FILE))) {
             String line;
+            br.readLine(); // skip header
 
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
+                if (parts.length < 5) continue;
 
                 String eventDate = parts[3].substring(0, 10);
 
@@ -37,14 +40,17 @@ public class EventSearch {
         }
     }
 
+    // ========= SEARCH BY EVENT NAME =========
     private static void searchByEvent(String name) {
         boolean found = false;
 
         try (BufferedReader br = new BufferedReader(new FileReader(EVENT_FILE))) {
             String line;
+            br.readLine(); // skip header
 
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
+                if (parts.length < 5) continue;
 
                 if (parts[1].equalsIgnoreCase(name)) {
                     String date = parts[3].substring(0, 10);
@@ -62,14 +68,17 @@ public class EventSearch {
         }
     }
 
+    // ========= SEARCH BY DATE RANGE =========
     private static void searchByRange(String startDate, String endDate) {
         boolean found = false;
 
         try (BufferedReader br = new BufferedReader(new FileReader(EVENT_FILE))) {
             String line;
+            br.readLine(); // skip header
 
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
+                if (parts.length < 5) continue;
 
                 String eventDate = parts[3].substring(0, 10);
 
@@ -90,24 +99,26 @@ public class EventSearch {
         }
     }
 
-
+    // ========= MAIN SEARCH MENU =========
     public static void searchEvents(Scanner scanner) {
 
         System.out.println("\n--- EVENT SEARCH ---");
         System.out.println("1. Search by date");
         System.out.println("2. Search by event name");
         System.out.println("3. Search by date range");
-        System.out.println("4. Back");
+        System.out.println("4. Advanced Search (Filter by Month)");
+        System.out.println("5. Back");
         System.out.print("Choose search type: ");
 
-        if (!scanner.hasNextInt()) {
+        String input = scanner.nextLine();
+        int choice;
+
+        try {
+            choice = Integer.parseInt(input);
+        } catch (Exception e) {
             System.out.println("Invalid input. Please enter a number.");
-            scanner.nextLine();
             return;
         }
-
-        int choice = scanner.nextInt();
-        scanner.nextLine();
 
         switch (choice) {
             case 1:
@@ -128,9 +139,12 @@ public class EventSearch {
                 searchByRange(start, end);
                 break;
 
+            case 4:
+                EventAdvancedSearch.advancedSearchMenu(scanner);
+                break;
+
             default:
                 return;
         }
     }
 }
-// 8/1/26
