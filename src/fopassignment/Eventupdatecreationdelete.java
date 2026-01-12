@@ -73,6 +73,14 @@ public class Eventupdatecreationdelete {
     
         System.out.print("Enter end date & time (YYYY-MM-DDTHH:MM): ");
         String endDateTime = scanner.nextLine();
+
+        // ===== CHECK CONFLICT =====
+        if (ConflictDetector.hasConflict(startDateTime, endDateTime)) {
+            System.out.println("⚠ This event conflicts with an existing event.");
+            System.out.println("Event NOT created.");
+            return;
+        }
+
     
         // ===== WRITE TO CSV (MATCHES EventSearch) =====
         try (FileWriter fw = new FileWriter("event.csv", true)) {
