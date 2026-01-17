@@ -42,7 +42,7 @@ public class Main {
                     break;
     
                 case 3:
-                    ViewCalendar.viewHandling(scanner);
+                    YearViewCalendar2026.viewHandling(scanner);
                     break;
     
                 case 4:
@@ -62,7 +62,7 @@ public class Main {
                     System.out.println("Invalid choice. Please try again.");
             }
         }
-    
+
         scanner.close();
     }
 }    
