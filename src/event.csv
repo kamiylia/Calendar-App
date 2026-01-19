@@ -1,12 +1,21 @@
-1,Meeting,Dr azizul,2026-09-10T00:00:00,2026-09-11T01:00:00
 2,Birthday,Lee,2026-09-10T00:00:00,2026-09-10T00:00:00
 4,bday,lee,2026-09-10T00:00:00,2026-09-10T00:00:00
 5,Hospital checkup,KPJ,2026-01-10T08:00:00,2026-01-10T08:00:01
 6,Birthday,Lee,2026-09-10T00:00:00,2026-09-10T00:00:01
 7,Birthday party,De Wans,2026-01-17T12:00:00,2026-01-17T14:00:00
-8,Meeting Assignment,DK1,2026-02-20T11:00:00,2026-02-20T14:00:00
+8,Meeting,DK1,2026-04-10T00:00:00,2026-04-11T00:00:00
 9,FOP exam,Exam hall,2026-02-05T08:00:00,2026-02-05T08:00:01
-10,Quiz,FOP,2026-04-05T00:00:00,2026-04-07T00:00:00
-11,Test 2,WIX1001,2026-01-13T08:00:00,2026-01-13T10:00:00
-12,Meetup,Joshua,2026-04-05T00:00:00,2026-04-07T00:00:00
-13,Parents Teacher annual dinner,Mont Kiara International School,2026-01-16T15:00:00,2026-01-16T21:30:00
+10,Quiz,FOP,2026-04-05T00:00:00,2026-04-07T00:00:0011,Lecture Programming Fundamentals,Introduction to control structures,2026-01-12T09:00:00,2026-01-12T11:00:00
+11,Group Project Meeting,Discussion on task allocation and project progress,2026-01-13T14:00:00,2026-01-13T15:30:00
+12,Lab Session,Hands-on practice with Java arrays and file handling,2026-01-14T10:00:00,2026-01-14T12:00:00
+13,Assignment Submission,Final submission deadline for FOP assignment,2026-01-15T23:59:00,2026-01-15T23:59:00
+14,Consultation Hour,One-on-one consultation with lecturer,2026-01-16T13:00:00,2026-01-16T14:00:00
+15,Study Revision Session,Revision session for upcoming quiz,2026-01-17T16:00:00,2026-01-17T18:00:00
+16,Weekly Planning,Planning tasks and schedule for next week,2026-01-18T20:00:00,2026-01-18T21:00:00
+17,Data Structures Lecture,Introduction to stacks and queues,2026-01-19T09:00:00,2026-01-19T11:00:00
+18,Group Project Discussion,Review milestones and resolve issues,2026-01-20T14:00:00,2026-01-20T15:30:00
+19,Java Lab Session,Practice file I/O and exception handling,2026-01-21T10:00:00,2026-01-21T12:00:00
+20,Quiz Preparation Workshop,Revision session for upcoming quiz,2026-01-22T16:00:00,2026-01-22T18:00:00
+21,Consultation Hour,Meet lecturer for project guidance,2026-01-23T13:00:00,2026-01-23T14:00:00
+22,Study Group Meeting,Collaborative study and problem solving,2026-01-24T15:00:00,2026-01-24T17:00:00
+23,Weekly Planning Session,Plan tasks and schedule for next week,2026-01-25T20:00:00,2026-01-25T21:00:00
